@@ -1,4 +1,5 @@
 import { Layout } from "antd";
+import { UserIndex } from "../pages/Users/UsersIndex";
 const { Content } = Layout;
 export function Contents() {
   return (
@@ -6,7 +7,9 @@ export function Contents() {
       <div
         className="site-layout-background"
         style={{ padding: 24, minHeight: 360 }}
-      ></div>
+      >
+        <UserIndex />
+      </div>
     </Content>
   );
 }
