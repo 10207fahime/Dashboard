@@ -33,7 +33,7 @@ export function UsersTable({ users, setUsers }) {
                     className="btn btn-sm btn-outline-primary "
                     // onClick={() => handleToggleIsdone(row.id)}
                   >
-                    <i class="bi bi-check2-square"></i>
+                    <i class="bi bi-pencil-square"></i>
                   </button>
                 </td>
               </tr>
