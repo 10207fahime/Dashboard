@@ -8,7 +8,9 @@ export function Contents() {
         className="site-layout-background"
         style={{ padding: 24, minHeight: 360 }}
       >
-        <UserIndex />
+        <div className="card p-5">
+          <UserIndex />
+        </div>
       </div>
     </Content>
   );

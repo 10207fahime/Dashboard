@@ -5,6 +5,7 @@ import axios from "axios";
 import { SearchUser } from "./SearchUser";
 import { CreateUser } from "./CreateUser";
 import { Skeleton } from "antd";
+import { Skeletons } from "./Skeletons";
 
 export function UserIndex() {
   const [users, setUsers] = useState([]);
@@ -34,7 +35,7 @@ export function UserIndex() {
         .finally(() => {
           setUsersLoading(false);
         });
-    }, 5000);
+    }, 20000);
   }, []);
   console.log(values, "fff");
   function handleCancel() {
@@ -44,7 +45,7 @@ export function UserIndex() {
   return (
     <>
       {isUsersLoading ? (
-        <p>loading....</p>
+        <Skeletons />
       ) : (
         <>
           <div className="row d-flex justify-content-between">

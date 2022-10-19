@@ -1,6 +1,8 @@
+import "./style.css";
+
 export function UsersTable({ users, setUsers }) {
   return (
-    <div className="d-flex p-2 justify-content-between">
+    <div className="d-flex p-2 justify-content-between table-style">
       <table className="table table-striped table-hover">
         <thead>
           <tr>
