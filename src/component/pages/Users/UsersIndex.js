@@ -1,46 +1,41 @@
 import { UsersTable } from "./UsersTable";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import { SearchUser } from "./SearchUser";
 import { CreateUser } from "./CreateUser";
-import { Skeleton } from "antd";
 import { Skeletons } from "./Skeletons";
+import { useSelector } from "react-redux";
+import { DeleteModal } from "./DeleteModal";
 
 export function UserIndex() {
+  const user = useSelector((state) => state.users.users);
   const [users, setUsers] = useState([]);
-  const [isUsersLoading, setUsersLoading] = useState(false);
+  const [isUsersLoading, setUsersLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState();
   const [values, setValues] = useState({
-    id: "",
+    id: `${user.length + 1}`,
     name: "",
-    country: "",
     age: "",
+    country: "",
   });
   useEffect(() => {
-    setUsersLoading(true);
     setTimeout(() => {
-      axios
-        .get("./mock.json")
-        .then(({ data }) => {
-          console.log({
-            data,
-          });
-
-          setUsers(data);
-        })
-        .catch((e) => {
-          console.log("error", e);
-        })
-        .finally(() => {
-          setUsersLoading(false);
-        });
-    }, 20000);
+      setUsersLoading(false);
+    }, 2000);
   }, []);
-  console.log(values, "fff");
+  console.log(user, "fff");
   function handleCancel() {
     setShowModal(false);
-    setValues({ id: "", name: "", country: "", age: "" });
+    setValues({ id: "", name: "", age: "", country: "" });
+  }
+  function handleCancelDeleteModal() {
+    setDeleteModal(false);
+  }
+  function handleDelete(id) {
+    setDeleteModal(true);
+    setDeleteId(id);
   }
   return (
     <>
@@ -52,13 +47,25 @@ export function UserIndex() {
             <SearchUser setShowModal={setShowModal} />
             <CreateUser
               showModal={showModal}
+              setShowModal={setShowModal}
               values={values}
               setValues={setValues}
               handleCancel={handleCancel}
             />
           </div>
 
-          <UsersTable users={users} setUsers={setUsers} />
+          <UsersTable
+            users={users}
+            setUsers={setUsers}
+            setDeleteModal={setDeleteModal}
+            handleDelete={handleDelete}
+          />
+          <DeleteModal
+            deleteModal={deleteModal}
+            setDeleteModal={setDeleteModal}
+            handleCancelDeleteModal={handleCancelDeleteModal}
+            deleteId={deleteId}
+          />
         </>
       )}
     </>

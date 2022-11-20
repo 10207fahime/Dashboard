@@ -1,16 +1,28 @@
 import { Modal } from "antd";
-
-export function CreateUser({ showModal, values, setValues, handleCancel }) {
+import { useDispatch } from "react-redux";
+import { Add_user } from "./../../../store/Users/action";
+import "./style.css";
+export function CreateUser({
+  showModal,
+  values,
+  setValues,
+  handleCancel,
+  setShowModal,
+}) {
+  const dispatch = useDispatch();
   return (
     <>
       <Modal
-        title="Add User"
+        title="افزودن کاربر"
         open={showModal}
-        // onOk={handleOk}
+        onOk={() => {
+          dispatch(Add_user(values));
+          setShowModal(false);
+        }}
         onCancel={handleCancel}
         style={{ direction: "rtl" }}
       >
-        <label for="exampleFormControlInput1" class="form-label">
+        <label htmlFor="exampleFormControlInput1" class="form-label">
           نام
         </label>
         <input
@@ -22,7 +34,7 @@ export function CreateUser({ showModal, values, setValues, handleCancel }) {
           value={values.name}
           aria-describedby="basic-addon2"
         />
-        <label for="exampleFormControlInput1" class="form-label">
+        <label htmlFor="exampleFormControlInput1" class="form-label">
           سن
         </label>
         <input
@@ -30,11 +42,13 @@ export function CreateUser({ showModal, values, setValues, handleCancel }) {
           className="form-control"
           placeholder="سن خود راوارد کنید"
           aria-label="Recipient's username"
-          onChange={(e) => setValues({ ...values, age: e.target.value })}
+          onChange={(e) =>
+            setValues({ ...values, age: Number(e.target.value) })
+          }
           value={values.age}
           aria-describedby="basic-addon2"
         />
-        <label for="exampleFormControlInput1" class="form-label">
+        <label htmlFor="exampleFormControlInput1" class="form-label">
           کشور
         </label>
         <input

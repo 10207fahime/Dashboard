@@ -1,4 +1,4 @@
-import { Divider, Form, Radio, Skeleton, Space, Switch } from "antd";
+import { Skeleton } from "antd";
 import { useState } from "react";
 export function Skeletons() {
   const [active, setActive] = useState(true);
